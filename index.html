@@ -3,158 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zawrer_hypr_rice</title>
+    <title>zawrer_hypr_desktop</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
 <div class="waybar">
     <div class="waybar-left">
         <div class="workspaces">
-            <span class="ws">1</span>
-            <span class="ws active">2</span>
-            <span class="ws">3</span>
-            <span class="ws">4</span>
+            <span class="ws" onclick="switchWS(this, 1)">1</span>
+            <span class="ws active" onclick="switchWS(this, 2)">2</span>
+            <span class="ws" onclick="switchWS(this, 3)">3</span>
+            <span class="ws" onclick="switchWS(this, 4)">4</span>
         </div>
-        <div class="active-window-title">CachyOS Ricing - Floating Zawrer</div>
+        <div class="active-window-title">CachyOS Ricing - Live Zawrer Desktop</div>
     </div>
     <div class="waybar-right">
-        <span class="module network"><i class="fas fa-wifi"></i> zawrer_net</span>
-        <span class="module lang">󰌌 EN</span>
+        <span class="module wifi"><i class="fas fa-wifi"></i> zawrer_lan</span>
+        <span class="module lang">󰌌 RU</span>
         <span class="module volume"><i class="fas fa-volume-up"></i> 100%</span>
-        <span class="module date">| 󰸗 2:38:40 PM</span>
-        <span class="module power"><i class="fas fa-power-off"></i></span>
+        <span class="module time">󰸗 <span id="real-time">--:--:--</span></span>
+        <span class="module power" onclick="shutdownReq()"><i class="fas fa-power-off"></i></span>
     </div>
 </div>
 
-<div class="hypr-desktop">
+<div class="hypr-desktop" id="desktop">
 
-    <div class="floating-window music-player" style="left: 10%; top: 15%;">
+    <div class="floating-window music-player" style="left: 8%; top: 10%; width: 450px; z-index: 10;">
         <div class="window-header">
-            <div class="dots-controls"><span></span><span></span><span></span></div>
-            <span class="title">ncmpcpp -- zawrer_mix</span>
+            <div class="dots-controls">
+                <span class="dot-red" onclick="closeWin(this)"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green" onclick="maxWin(this)"></span>
+            </div>
+            <span class="title">ncmpcpp -- lord_huron.mix</span>
         </div>
         <div class="window-content ncmpcpp-body">
             <div class="metadata">
-                <div class="time">2:38/3:17 [playing]</div>
+                <div class="time-meta">2:38/3:17 [playing]</div>
                 <div class="track-info">
                     <span class="icon">♫</span>
-                    <span class="artist">The Night We Met</span> -- 
-                    <span class="title">Lord Huron</span> (2015)
+                    <span class="artist">Lord Huron</span> -- 
+                    <span class="track-title">The Night We Met</span>
                 </div>
-                <div class="vol">Vol: 100% [P-----]</div>
             </div>
-            <hr class="separator">
-            <div class="playlist">
-                <ol start="1">
-                    <li class="active">Lord Huron The Night We Met</li>
-                    <li>Mr.Kitty After Dark</li>
-                    <li>Sunset The Midnight</li>
-                    <li>Apocalypse Cigarettes After Sex</li>
-                    <li>Rust Programming - Lord Huron? (WIP)</li>
-                </ol>
-            </div>
-            <hr class="separator">
-            <div class="progress-bar">
-                <div class="track-progress" style="width: 80%;"></div>
-            </div>
+            <hr class="term-sep">
+            <div class="progress-bar-ascii">[████████████████████████████████------------------]</div>
         </div>
     </div>
 
-    <div class="floating-window file-manager" style="left: 5%; top: 55%;">
+    <div class="floating-window file-manager" style="left: 3%; top: 50%; width: 500px; z-index: 10;">
         <div class="window-header">
-            <div class="dots-controls"><span></span><span></span><span></span></div>
+            <div class="dots-controls">
+                <span class="dot-red" onclick="closeWin(this)"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green" onclick="maxWin(this)"></span>
+            </div>
             <span class="title">ranger: /home/zawrer/tech_stack</span>
         </div>
         <div class="window-content ranger-body">
-            <div class="ranger-left">
-                <ul class="file-list">
-                    <li>D [lang]</li>
-                    <li>D [db]</li>
-                    <li>D [tools]</li>
-                    <li>F about_me.md</li>
-                    <li>F resume.pdf</li>
+            <div class="ranger-col ranger-left">
+                <ul class="r-list">
+                    <li><i class="fas fa-folder"></i> core/</li>
+                    <li class="selected directory"><i class="fas fa-folder-open"></i> stack/</li>
+                    <li><i class="fas fa-file"></i> notes.md</li>
                 </ul>
             </div>
-            <div class="ranger-main">
-                <h3 class="fetch-key">Current Directory Content:</h3>
-                <ul class="file-list tree">
-                    <li class="directory selected">
+            <div class="ranger-col ranger-main">
+                <ul class="r-list tree">
+                    <li class="directory active">
                         <span class="item">LANGUAGES</span>
-                        <ul>
-                            <li><i class="fab fa-cplusplus"></i> C++ / C</li>
-                            <li><i class="fab fa-rust"></i> Rust</li>
-                            <li><i class="fab fa-python"></i> Python</li>
-                        </ul>
-                    </li>
-                    <li class="directory">DATABASES
-                        <ul>
-                            <li>SQLite</li>
-                            <li>PostgreSQL</li>
-                        </ul>
+                        <ul><li>C++ / C</li><li>Rust</li><li>Python</li></ul>
                     </li>
                     <li class="directory">TOOLS
-                        <ul>
-                            <li>Git</li>
-                            <li>Docker</li>
-                            <li><span class="os-icon"></span> Arch Linux (CachyOS)</li>
-                        </ul>
+                        <ul><li>Git / Docker</li><li>Arch Linux</li></ul>
                     </li>
                 </ul>
-            </div>
-            <div class="ranger-footer">
-                drwxr-xr-x 2 zawrer zawrer 4.0K May 15 2:38 .
             </div>
         </div>
     </div>
 
-    <div class="floating-window system-info" style="left: 60%; top: 25%;">
+    <div class="floating-window system-info" style="left: 55%; top: 15%; width: 480px; z-index: 10;">
         <div class="window-header">
-            <div class="dots-controls"><span></span><span></span><span></span></div>
-            <span class="title">neofetch --zawrer</span>
-        </div>
-        <div class="window-content neofetch-body">
-            <div class="fastfetch-ascii">
-                <pre>
-     _____  
-    /_____\ 
-   /  _____\
-  /  /   __\
- /  /   /__\
- \_ \   \__/
-   \_ \_____
-     \_____/</pre>
-                <div class="fetch-stats-gh">
-                    <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=b4befe&text_color=a6adc8&icon_color=b4befe" alt="GH Stats" />
-                </div>
+            <div class="dots-controls">
+                <span class="dot-red" onclick="closeWin(this)"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green" onclick="maxWin(this)"></span>
             </div>
-            <div class="fetch-data">
+            <span class="title">fastfetch --user zawrer</span>
+        </div>
+        <div class="window-content fastfetch-body">
+            <div class="fastfetch-left">
+                <pre class="ascii-logo">
+      /\
+     /  \
+    /\   \
+   /  \   \
+  /    \   \
+/      \   \
+                </pre>
+            </div>
+            <div class="fastfetch-right">
                 <h1 class="user-host">zawrer@cachyos</h1>
                 <hr class="sep">
-                <div class="data-pair"><span class="key">OS</span>: CachyOS / Arch Linux x86_64</div>
-                <div class="data-pair"><span class="key">Kernel</span>: 6.8.9-cachyos</div>
+                <div class="data-pair"><span class="key">OS</span>: Arch Linux x86_64</div>
                 <div class="data-pair"><span class="key">Shell</span>: zsh</div>
-                <div class="data-pair"><span class="key">WM</span>: Hyprland (Floating Zawrer Rice)</div>
-                <div class="data-pair"><span class="key">Net</span>: WiFi: (WIP)</div>
-                <div class="data-pair"><span class="key">RAM</span>: (WIP) GiB / 16.0 GiB</div>
-                
-                <div class="color-blocks">
-                    <span class="block bg-red"></span>
-                    <span class="block bg-green"></span>
-                    <span class="block bg-yellow"></span>
-                    <span class="block bg-blue"></span>
-                    <span class="block bg-magenta"></span>
-                    <span class="block bg-cyan"></span>
+                <div class="data-pair"><span class="key">WM</span>: Hyprland (Floating Rice)</div>
+                <hr class="sep">
+                <div class="fastfetch-gh">
+                    <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=cba6f7&text_color=a6adc8&icon_color=cba6f7" alt="GH Stats" />
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="floating-window gotop" style="left: 50%; top: 58%; width: 550px; z-index: 10;">
+        <div class="window-header">
+            <div class="dots-controls">
+                <span class="dot-red" onclick="closeWin(this)"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green" onclick="maxWin(this)"></span>
+            </div>
+            <span class="title">gotop - v4.1.2</span>
+        </div>
+        <div class="window-content gotop-body">
+            <div class="gotop-row">
+                <div class="gotop-graph cpu-graph">
+                    <span class="label">CPU</span>
+                    <div class="graph-bar-chart">
+                        <div class="bar bar-1"></div><div class="bar bar-2"></div><div class="bar bar-3"></div><div class="bar bar-4"></div><div class="bar bar-5"></div>
+                    </div>
+                </div>
+                <div class="gotop-graph mem-graph">
+                    <span class="label">MEM</span>
+                    <div class="graph-bar-chart">
+                        <div class="bar bar-1"></div><div class="bar bar-2"></div><div class="bar bar-3"></div><div class="bar bar-4"></div><div class="bar bar-5"></div>
+                    </div>
+                </div>
+            </div>
+            <hr class="term-sep">
+            <div class="gotop-processes">
+                <span class="label">PROCESSES (Recent repos)</span>
+                <ul class="process-list">
+                    <li><span class="pid">102</span> [PID] <span class="cmd">cachyos-rice</span></li>
+                    <li><span class="pid">105</span> [PID] <span class="cmd">zawrer.github.io</span></li>
+                    <li><span class="pid">110</span> [PID] <span class="cmd">linux-kernel-study</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-window imv" style="left: 35%; top: 40%; width: 350px; z-index: 10;">
+        <div class="window-header">
+            <div class="dots-controls">
+                <span class="dot-red" onclick="closeWin(this)"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green" onclick="maxWin(this)"></span>
+            </div>
+            <span class="title">imv -- view_splash.sh</span>
+        </div>
+        <div class="window-content imv-body center-content">
+            <pre class="ascii-art">
+   _____  
+  |  __ \ 
+  | |__) |
+  |  _  / 
+  | | \ \ 
+  |_|  \_\
+            </pre>
+            <div class="image-label">Arch Linux - Rice Splash</div>
         </div>
     </div>
 
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
