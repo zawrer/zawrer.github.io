@@ -1,240 +1,310 @@
 :root {
-    --bg-main: #11111b;       /* Палитра Catppuccin Mocha */
+    /* Палитра Catppuccin Mocha */
+    --bg-main: #11111b;
+    --bar-bg: #11111b;
     --window-bg: #181825;
-    --bar-bg: #1e1e2e;
-    --border-active: #b4befe; /* Лавандовый цвет фокуса */
-    --border-inactive: #313244;
+    --window-border: #313244;
     --text-main: #cdd6f4;
-    --text-dim: #a6adc8;
+    --text-dim: #bac2de;
     --text-muted: #6c7086;
-    --gaps: 15px;
+    
+    /* Акцентные цвета neofetch */
+    --arch-blue: #a6bdf5;
+    --magenta: #cba6f7;
+    --red: #f38ba8;
+    --green: #a6e3a1;
+    --yellow: #f9e2af;
+    --blue: #89b4fa;
+    --cyan: #89dceb;
+
+    /* Шрифт */
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 body {
-    font-family: 'Fira Code', monospace;
-    background-color: var(--bg-main);
-    color: var(--text-main);
+    font-family: var(--font-mono);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    min-height: 100vh;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    
+    /* ВОССОЗДАЕМ ФОН РАБОЧЕГО СТОЛА ИЗ СКРИНШОТА */
+    background-image: 
+        linear-gradient(to bottom, rgba(214, 100, 135, 0.9) 0%, rgba(111, 120, 188, 0.8) 50%, rgba(76, 86, 137, 0.9) 100%),
+        url('https://c4.wallpaperflare.com/wallpaper/108/66/143/sunset-cityscape-city-buildings-wallpaper-preview.jpg'); /* Ссылка на закатный город для бэкграунда */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center bottom;
 }
 
 /* WAYBAR */
 .waybar {
-    height: 28px;
+    height: 32px;
     background-color: var(--bar-bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 12px;
-    font-size: 0.8rem;
-    border-bottom: 1px solid var(--border-inactive);
+    padding: 0 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--window-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
 }
 
 .waybar-left, .waybar-right {
     display: flex;
-    gap: 14px;
+    gap: 15px;
+    align-items: center;
 }
 
-.ws {
+.workspaces {
+    display: flex;
+    gap: 2px;
+}
+.workspaces .ws {
     color: var(--text-muted);
     font-weight: bold;
-    padding: 0 2px;
+    padding: 0 4px;
+}
+.workspaces .ws.active {
+    color: var(--magenta);
+    border-bottom: 2px solid var(--magenta);
 }
 
-.ws.active {
-    color: var(--border-active);
+.active-window-title {
+    color: var(--text-muted);
+    font-size: 0.8rem;
 }
 
-.window-title {
+.module {
+    padding: 2px 5px;
     color: var(--text-dim);
 }
+.module.power { color: var(--red); cursor: pointer; }
 
-.mod {
-    color: var(--text-dim);
+/* HYPRLAND FLOATING WINDOWS WORKSPACE */
+.hypr-desktop {
+    margin-top: 32px; /* waybar offset */
+    height: calc(100vh - 32px);
+    width: 100vw;
+    position: relative;
 }
 
-/* TILING LAYOUT */
-.hypr-container {
+/* ОБЩИЕ СТИЛИ ДЛЯ ПЛАВАЮЩИХ ОКОН */
+.floating-window {
+    position: absolute;
+    background-color: rgba(24, 24, 37, 0.85); /* Полупрозрачность для эффекта Wayland */
+    border: 1px solid var(--window-border);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+/* HEADER ОКОН */
+.window-header {
+    background-color: var(--bar-bg);
+    padding: 4px 10px;
     display: flex;
-    max-width: 1280px;
-    margin: 25px auto;
-    padding: 0 var(--gaps);
-    gap: var(--gaps);
+    align-items: center;
+    border-bottom: 1px solid var(--window-border);
 }
 
-.hypr-column {
+.dots-controls {
+    display: flex;
+    gap: 5px;
+    margin-right: 15px;
+}
+.dots-controls span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+}
+
+.title {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: lowercase;
+}
+
+.window-content {
+    padding: 15px;
+}
+
+/* NCMPCPP STYLE (WINDOW 1) */
+.ncmpcpp-body {
+    padding: 10px;
+}
+
+.metadata {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    color: var(--text-dim);
+}
+.track-info { display: flex; align-items: center;}
+.track-info .icon { color: var(--magenta); margin-right: 5px; }
+.artist { font-weight: bold; margin-right: 5px; }
+
+.term-sep {
+    border: 0;
+    height: 1px;
+    background-color: var(--window-border);
+    margin: 5px 0;
+}
+
+.playlist {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 10px 0;
+}
+.playlist ol { margin: 0; padding-left: 20px; }
+.playlist li { margin-bottom: 2px; }
+.p-item.active {
+    color: var(--arch-blue);
+    font-weight: bold;
+}
+
+.progress-bar-ascii {
+    color: var(--magenta);
+    letter-spacing: -2px;
+    font-size: 0.9rem;
+}
+
+/* RANGER STYLE (WINDOW 2) */
+.ranger-body {
+    display: flex;
+    padding: 10px;
+    gap: 15px;
+    font-size: 0.9rem;
+    position: relative;
+    min-height: 250px;
+}
+
+.ranger-col {
     display: flex;
     flex-direction: column;
-    gap: var(--gaps);
 }
+.ranger-left { flex: 1; border-right: 1px solid var(--window-border); }
+.ranger-main { flex: 2; padding-left: 10px; }
 
-.flex-3 { flex: 3; }
-.flex-2 { flex: 2; }
+.r-list { list-style: none; margin: 0; padding: 0; }
+.r-list li { margin-bottom: 4px; color: var(--text-muted); }
+.r-list.tree ul { padding-left: 15px; }
+.selected { color: var(--magenta); font-weight: bold;}
 
-/* WINDOW TILES */
-.hypr-window {
-    background-color: var(--window-bg);
-    border: 2px solid var(--border-inactive);
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
+.fetch-key { color: var(--magenta); margin: 0 0 10px 0; font-size: 0.95rem; text-transform: uppercase;}
 
-/* Hyprland active_border */
-.hypr-window.focused {
-    border-color: var(--border-active);
-}
+.directory { color: var(--arch-blue); }
+.os-icon { width: 14px; height: 14px; display: inline-block; background-color: #1793D1; border-radius: 50%; vertical-align: middle;}
 
-/* TERMINAL TITLEBAR */
-.window-bar {
-    background-color: rgba(0, 0, 0, 0.15);
-    padding: 6px 12px;
-    font-size: 0.75rem;
+.ranger-footer {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    right: 10px;
+    padding: 5px;
+    border-top: 1px solid var(--window-border);
+    font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+/* FASTFETCH STYLE (WINDOW 3) */
+.fastfetch-body {
     display: flex;
+    padding: 10px;
+    gap: 20px;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-.window-bar .dots::before {
-    content: "● ● ● ";
-    color: var(--text-muted);
-    font-size: 0.65rem;
-    margin-right: 8px;
-    letter-spacing: -1px;
-}
-
-.bar-title {
-    font-weight: 500;
-}
-
-.window-body {
-    padding: 18px;
-}
-
-/* FASTFETCH PROFILE SPECIFIC */
-.profile-body {
+.fastfetch-left {
     display: flex;
-    gap: 25px;
+    flex-direction: column;
     align-items: center;
+    gap: 15px;
 }
 
 .ascii-logo {
     color: #1793D1; /* Arch Blue */
     font-weight: bold;
     white-space: pre;
-    line-height: 1.2;
-    font-size: 0.95rem;
+    line-height: 1.1;
+    font-size: 0.8rem;
 }
 
-.fetch-info {
-    font-size: 0.9rem;
+/* ЦВЕТОВЫЕ БЛОКИ fastfetch */
+.color-blocks {
+    display: flex;
+    gap: 2px;
+}
+.block {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+}
+.bg-red { background-color: var(--red); }
+.bg-green { background-color: var(--green); }
+.bg-yellow { background-color: var(--yellow); }
+.bg-blue { background-color: var(--blue); }
+.bg-magenta { background-color: var(--magenta); }
+.bg-cyan { background-color: var(--cyan); }
+
+.fastfetch-right {
+    font-size: 0.85rem;
+    flex: 2;
 }
 
-.fetch-user {
-    color: var(--border-active);
+.user-host {
+    font-size: 1.1rem;
     font-weight: bold;
+    margin: 0;
+    color: var(--arch-blue);
 }
 
-.fetch-host {
-    color: #1793D1;
-    font-weight: bold;
-}
-
-.fetch-sep {
+.sep {
     border: 0;
     height: 1px;
-    background: var(--border-inactive);
+    background: var(--window-border);
     margin: 6px 0;
 }
 
-.fetch-key {
-    color: var(--border-active);
+.key {
+    color: var(--magenta);
     font-weight: bold;
 }
 
-/* CONTENT STYLING */
-.linux-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.linux-list li {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    color: var(--text-main);
-    display: flex;
-}
-
-.list-bullet {
-    color: var(--border-active);
-    margin-right: 10px;
-    font-weight: bold;
-}
-
-.os-highlight {
-    color: #1793D1;
-    font-weight: bold;
-}
-
-.stack-section {
-    margin-bottom: 15px;
-}
-
-.section-tag {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-}
-
-.badges-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.badges-container img {
-    height: 26px;
-    border-radius: 3px;
-}
-
-/* MEDIA & GRAPHS BOXES */
-.media-body {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.media-body img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
-.split-gap {
+.fastfetch-gh {
     margin-top: 10px;
+    padding: 5px;
+    background-color: var(--window-bg);
 }
+.fastfetch-gh img { width: 100%; height: auto; }
 
-.contacts-body {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-start;
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 850px) {
-    .hypr-container {
-        flex-direction: column;
+/* MOBILE RESPONSIVE HACK */
+@media (max-width: 900px) {
+    .floating-window {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin-bottom: 20px;
     }
-    .profile-body {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+    .hypr-desktop {
+        height: auto;
+        padding: 20px;
+        overflow-y: auto;
     }
-    .waybar-center {
+    .waybar {
         display: none;
     }
 }
