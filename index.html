@@ -3,150 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zawrer@cachyos: ~</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap">
+    <title>zawrer_hypr_rice</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- WAYBAR -->
 <div class="waybar">
     <div class="waybar-left">
-        <span class="ws">1</span>
-        <span class="ws active">2</span>
-        <span class="ws">3</span>
-        <span class="ws">4</span>
-    </div>
-    <div class="waybar-center">
-        <span class="window-title">zawrer@cachyos: /home/zawrer</span>
+        <div class="workspaces">
+            <span class="ws">1</span>
+            <span class="ws active">2</span>
+            <span class="ws">3</span>
+            <span class="ws">4</span>
+        </div>
+        <div class="active-window-title">CachyOS Ricing - Floating Zawrer</div>
     </div>
     <div class="waybar-right">
-        <span class="mod cpu">cpu: 18%</span>
-        <span class="mod mem">mem: 3.8 GiB</span>
-        <span class="mod lang">ru</span>
-        <span class="mod date">󰸗 cachyos-swm</span>
+        <span class="module network"><i class="fas fa-wifi"></i> zawrer_net</span>
+        <span class="module lang">󰌌 EN</span>
+        <span class="module volume"><i class="fas fa-volume-up"></i> 100%</span>
+        <span class="module date">| 󰸗 2:38:40 PM</span>
+        <span class="module power"><i class="fas fa-power-off"></i></span>
     </div>
 </div>
 
-<!-- HYPRLAND WORKSPACE CONTAINER -->
-<div class="hypr-container">
+<div class="hypr-desktop">
 
-    <!-- LEFT COLUMN -->
-    <div class="hypr-column flex-3">
-        
-        <!-- WINDOW 1: FASTFETCH / PROFILE -->
-        <div class="hypr-window focused">
-            <div class="window-bar">
-                <span class="dots"></span>
-                <span class="bar-title">fastfetch</span>
-            </div>
-            <div class="window-body profile-body">
-                <div class="ascii-logo">
-    /\
-   /  \
-  /\   \
- /  \   \
-/    \   \
-/      \   \
-                </div>
-                <div class="fetch-info">
-                    <span class="fetch-user">zawrer</span>@<span class="fetch-host">cachyos</span>
-                    <hr class="fetch-sep">
-                    <div><span class="fetch-key">OS</span>: CachyOS / Arch Linux x86_64</div>
-                    <div><span class="fetch-key">WM</span>: Hyprland (Wayland)</div>
-                    <div><span class="fetch-key">Shell</span>: zsh</div>
-                    <div><span class="fetch-key">Editor</span>: Neovim / VS Code</div>
-                    <div><span class="fetch-key">Status</span>: Student Developer</div>
-                </div>
-            </div>
+    <div class="floating-window music-player" style="left: 10%; top: 15%;">
+        <div class="window-header">
+            <div class="dots-controls"><span></span><span></span><span></span></div>
+            <span class="title">ncmpcpp -- zawrer_mix</span>
         </div>
-
-        <!-- WINDOW 2: ABOUT ME -->
-        <div class="hypr-window">
-            <div class="window-bar">
-                <span class="dots"></span>
-                <span class="bar-title">cat about_me.md</span>
-            </div>
-            <div class="window-body">
-                <ul class="linux-list">
-                    <li><span class="list-bullet">~</span> <strong>Focus:</strong> Информационная безопасность, низкоуровневое программирование (C/C++) и сетевые технологии.</li>
-                    <li><span class="list-bullet">~</span> <strong>OS Stack:</strong> Основной рабочий инструмент — <span class="os-highlight">CachyOS (Arch Linux)</span> для разработки и хакинга, Windows 11 для специфических задач.</li>
-                    <li><span class="list-bullet">~</span> <strong>Current Activity:</strong> Изучаю архитектуру сетей, пентест и основы реверс-инжиниринга.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- WINDOW 3: TECH STACK -->
-        <div class="hypr-window">
-            <div class="window-bar">
-                <span class="dots"></span>
-                <span class="bar-title">ls --tree /skills</span>
-            </div>
-            <div class="window-body">
-                <div class="stack-section">
-                    <div class="section-tag">[ Languages ]</div>
-                    <div class="badges-container">
-                        <img src="https://img.shields.io/badge/C%2B%2B-1e1e2e?style=for-the-badge&logo=c%2B%2B&logoColor=cdd6f4" alt="C++">
-                        <img src="https://img.shields.io/badge/C%23-1e1e2e?style=for-the-badge&logo=c-sharp&logoColor=cdd6f4" alt="C#">
-                        <img src="https://img.shields.io/badge/Rust-1e1e2e?style=for-the-badge&logo=rust&logoColor=cdd6f4" alt="Rust">
-                        <img src="https://img.shields.io/badge/Python-1e1e2e?style=for-the-badge&logo=python&logoColor=cdd6f4" alt="Python">
-                        <img src="https://img.shields.io/badge/Bash-1e1e2e?style=for-the-badge&logo=gnu-bash&logoColor=cdd6f4" alt="Bash">
-                    </div>
+        <div class="window-content ncmpcpp-body">
+            <div class="metadata">
+                <div class="time">2:38/3:17 [playing]</div>
+                <div class="track-info">
+                    <span class="icon">♫</span>
+                    <span class="artist">The Night We Met</span> -- 
+                    <span class="title">Lord Huron</span> (2015)
                 </div>
-                <div class="stack-section">
-                    <div class="section-tag">[ Tools & Databases ]</div>
-                    <div class="badges-container">
-                        <img src="https://img.shields.io/badge/SQLite-1e1e2e?style=for-the-badge&logo=sqlite&logoColor=cdd6f4" alt="SQLite">
-                        <img src="https://img.shields.io/badge/PostgreSQL-1e1e2e?style=for-the-badge&logo=postgresql&logoColor=cdd6f4" alt="PostgreSQL">
-                        <img src="https://img.shields.io/badge/Git-1e1e2e?style=for-the-badge&logo=git&logoColor=cdd6f4" alt="Git">
-                        <img src="https://img.shields.io/badge/Arch_Linux-1e1e2e?style=for-the-badge&logo=arch-linux&logoColor=1793D1" alt="Arch Linux">
-                        <img src="https://img.shields.io/badge/Docker-1e1e2e?style=for-the-badge&logo=docker&logoColor=cdd6f4" alt="Docker">
-                    </div>
-                </div>
+                <div class="vol">Vol: 100% [P-----]</div>
+            </div>
+            <hr class="separator">
+            <div class="playlist">
+                <ol start="1">
+                    <li class="active">Lord Huron The Night We Met</li>
+                    <li>Mr.Kitty After Dark</li>
+                    <li>Sunset The Midnight</li>
+                    <li>Apocalypse Cigarettes After Sex</li>
+                    <li>Rust Programming - Lord Huron? (WIP)</li>
+                </ol>
+            </div>
+            <hr class="separator">
+            <div class="progress-bar">
+                <div class="track-progress" style="width: 80%;"></div>
             </div>
         </div>
     </div>
 
-    <!-- RIGHT COLUMN -->
-    <div class="hypr-column flex-2">
-        
-        <!-- WINDOW 4: GITHUB METRICS -->
-        <div class="hypr-window">
-            <div class="window-bar">
-                <span class="dots"></span>
-                <span class="bar-title">gh api /user/stats</span>
+    <div class="floating-window file-manager" style="left: 5%; top: 55%;">
+        <div class="window-header">
+            <div class="dots-controls"><span></span><span></span><span></span></div>
+            <span class="title">ranger: /home/zawrer/tech_stack</span>
+        </div>
+        <div class="window-content ranger-body">
+            <div class="ranger-left">
+                <ul class="file-list">
+                    <li>D [lang]</li>
+                    <li>D [db]</li>
+                    <li>D [tools]</li>
+                    <li>F about_me.md</li>
+                    <li>F resume.pdf</li>
+                </ul>
             </div>
-            <div class="window-body media-body">
-                <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=b4befe&text_color=a6adc8&icon_color=b4befe" alt="GitHub Stats" />
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=zawrer&layout=compact&theme=dark&hide_border=true&bg_color=181825&title_color=b4befe&text_color=a6adc8" alt="Top Languages" class="split-gap" />
+            <div class="ranger-main">
+                <h3 class="fetch-key">Current Directory Content:</h3>
+                <ul class="file-list tree">
+                    <li class="directory selected">
+                        <span class="item">LANGUAGES</span>
+                        <ul>
+                            <li><i class="fab fa-cplusplus"></i> C++ / C</li>
+                            <li><i class="fab fa-rust"></i> Rust</li>
+                            <li><i class="fab fa-python"></i> Python</li>
+                        </ul>
+                    </li>
+                    <li class="directory">DATABASES
+                        <ul>
+                            <li>SQLite</li>
+                            <li>PostgreSQL</li>
+                        </ul>
+                    </li>
+                    <li class="directory">TOOLS
+                        <ul>
+                            <li>Git</li>
+                            <li>Docker</li>
+                            <li><span class="os-icon"></span> Arch Linux (CachyOS)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="ranger-footer">
+                drwxr-xr-x 2 zawrer zawrer 4.0K May 15 2:38 .
             </div>
         </div>
+    </div>
 
-        <!-- WINDOW 5: STREAK & GRAPH -->
-        <div class="hypr-window">
-            <div class="window-bar">
-                <span class="dots"></span>
-                <span class="bar-title">contributions_graph.out</span>
-            </div>
-            <div class="window-body media-body">
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=zawrer&theme=dark&hide_border=true&background=181825&title=b4befe&text=a6adc8&stroke=b4befe" alt="Streak" />
-                <img src="https://github-readme-activity-graph.vercel.app/graph?username=zawrer&theme=github-dark&bg_color=181825&hide_border=true&area=true&color=b4befe" alt="Activity Graph" class="split-gap" />
-            </div>
+    <div class="floating-window system-info" style="left: 60%; top: 25%;">
+        <div class="window-header">
+            <div class="dots-controls"><span></span><span></span><span></span></div>
+            <span class="title">neofetch --zawrer</span>
         </div>
-
-        <!-- WINDOW 6: CONTACTS -->
-        <div class="hypr-window">
-            <div class="window-bar">
-                <span class="dots"></span>
-                <span class="bar-title">ssh /links</span>
+        <div class="window-content neofetch-body">
+            <div class="fastfetch-ascii">
+                <pre>
+     _____  
+    /_____\ 
+   /  _____\
+  /  /   __\
+ /  /   /__\
+ \_ \   \__/
+   \_ \_____
+     \_____/</pre>
+                <div class="fetch-stats-gh">
+                    <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=b4befe&text_color=a6adc8&icon_color=b4befe" alt="GH Stats" />
+                </div>
             </div>
-            <div class="window-body contacts-body">
-                <a href="https://t.me/@six6666seven7777" target="_blank">
-                    <img src="https://img.shields.io/badge/Telegram-1e1e2e?style=for-the-badge&logo=telegram&logoColor=cdd6f4" alt="Telegram" />
-                </a>
-                <a href="https://discord.com/users/@six6666seven7777" target="_blank">
-                    <img src="https://img.shields.io/badge/Discord-1e1e2e?style=for-the-badge&logo=discord&logoColor=cdd6f4" alt="Discord" />
-                </a>
+            <div class="fetch-data">
+                <h1 class="user-host">zawrer@cachyos</h1>
+                <hr class="sep">
+                <div class="data-pair"><span class="key">OS</span>: CachyOS / Arch Linux x86_64</div>
+                <div class="data-pair"><span class="key">Kernel</span>: 6.8.9-cachyos</div>
+                <div class="data-pair"><span class="key">Shell</span>: zsh</div>
+                <div class="data-pair"><span class="key">WM</span>: Hyprland (Floating Zawrer Rice)</div>
+                <div class="data-pair"><span class="key">Net</span>: WiFi: (WIP)</div>
+                <div class="data-pair"><span class="key">RAM</span>: (WIP) GiB / 16.0 GiB</div>
+                
+                <div class="color-blocks">
+                    <span class="block bg-red"></span>
+                    <span class="block bg-green"></span>
+                    <span class="block bg-yellow"></span>
+                    <span class="block bg-blue"></span>
+                    <span class="block bg-magenta"></span>
+                    <span class="block bg-cyan"></span>
+                </div>
             </div>
         </div>
     </div>
