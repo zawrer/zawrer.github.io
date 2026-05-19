@@ -13,12 +13,12 @@
 <div class="waybar">
     <div class="waybar-left">
         <div class="workspaces">
-            <span class="ws" onclick="switchWS(this, 1)">1</span>
-            <span class="ws active" onclick="switchWS(this, 2)">2</span>
+            <span class="ws active" onclick="switchWS(this, 1)">1</span>
+            <span class="ws" onclick="switchWS(this, 2)">2</span>
             <span class="ws" onclick="switchWS(this, 3)">3</span>
             <span class="ws" onclick="switchWS(this, 4)">4</span>
         </div>
-        <div class="active-window-title">CachyOS Ricing - Live Zawrer Desktop</div>
+        <div class="active-window-title" id="waybar-title">CachyOS Ricing - Live Zawrer Desktop</div>
     </div>
     <div class="waybar-right">
         <span class="module wifi"><i class="fas fa-wifi"></i> zawrer_lan</span>
@@ -31,34 +31,90 @@
 
 <div class="hypr-desktop" id="desktop">
 
-    <div class="floating-window music-player" style="left: 8%; top: 10%; width: 450px; z-index: 10;">
+    <div class="floating-window system-info" data-ws="1" style="left: 2%; top: 8%; width: 520px; z-index: 10;">
         <div class="window-header">
             <div class="dots-controls">
                 <span class="dot-red" onclick="closeWin(this)"></span>
-                <span class="dot-yellow"></span>
+                <span class="dot-yellow" onclick="minimizeWin(this)"></span>
                 <span class="dot-green" onclick="maxWin(this)"></span>
             </div>
-            <span class="title">ncmpcpp -- lord_huron.mix</span>
+            <span class="title">kitty -- zawrer@cachyos: ~</span>
         </div>
-        <div class="window-content ncmpcpp-body">
-            <div class="metadata">
-                <div class="time-meta">2:38/3:17 [playing]</div>
-                <div class="track-info">
-                    <span class="icon">♫</span>
-                    <span class="artist">Lord Huron</span> -- 
-                    <span class="track-title">The Night We Met</span>
+        <div class="window-content terminal-window">
+            <div class="fastfetch-body" id="fastfetch-view">
+                <div class="fastfetch-left">
+                    <pre class="ascii-logo">
+      /\
+     /  \
+    /\   \
+   /  \   \
+  /    \   \
+/      \   \
+                    </pre>
+                </div>
+                <div class="fastfetch-right">
+                    <h1 class="user-host">zawrer@cachyos</h1>
+                    <hr class="sep">
+                    <div class="data-pair"><span class="key">OS</span>: Arch Linux x86_64</div>
+                    <div class="data-pair"><span class="key">Shell</span>: zsh (interactive)</div>
+                    <div class="data-pair"><span class="key">WM</span>: Hyprland (Floating Rice)</div>
+                    <hr class="sep">
+                    <div class="fastfetch-gh">
+                        <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=cba6f7&text_color=a6adc8&icon_color=cba6f7" alt="GH Stats" />
+                    </div>
                 </div>
             </div>
-            <hr class="term-sep">
-            <div class="progress-bar-ascii">[████████████████████████████████------------------]</div>
+            <div class="terminal-body" id="terminal-screen">
+                <div id="terminal-output">Введите 'help' для списка доступных команд.</div>
+                <div class="input-line">
+                    <span class="prompt">zawrer@cachyos:~$</span>
+                    <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="floating-window file-manager" style="left: 3%; top: 50%; width: 500px; z-index: 10;">
+    <div class="floating-window music-player" data-ws="1" style="left: 55%; top: 8%; width: 450px; z-index: 10;">
         <div class="window-header">
             <div class="dots-controls">
                 <span class="dot-red" onclick="closeWin(this)"></span>
-                <span class="dot-yellow"></span>
+                <span class="dot-yellow" onclick="minimizeWin(this)"></span>
+                <span class="dot-green" onclick="maxWin(this)"></span>
+            </div>
+            <span class="title">ncmpcpp -- audio_player</span>
+        </div>
+        <div class="window-content ncmpcpp-body">
+            <div class="metadata">
+                <div class="time-meta" id="player-time">0:00 / 0:00</div>
+                <div class="track-info">
+                    <span class="icon">♫</span>
+                    <span id="player-artist">Загрузка...</span> -- 
+                    <span id="player-title">Загрузка...</span>
+                </div>
+            </div>
+            <hr class="term-sep">
+            <div class="player-progress-container">
+                <span class="p-bracket">[</span>
+                <div class="player-progress-bar" id="progress-bar"></div>
+                <span class="p-bracket">]</span>
+            </div>
+            <div class="player-controls">
+                <button onclick="prevTrack()"><i class="fas fa-backward"></i></button>
+                <button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
+                <button onclick="nextTrack()"><i class="fas fa-forward"></i></button>
+            </div>
+            <div class="playlist-container">
+                <span class="label">Очередь воспроизведения:</span>
+                <ul class="playlist" id="playlist-entries"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-window file-manager" data-ws="2" style="left: 5%; top: 15%; width: 500px; z-index: 10;">
+        <div class="window-header">
+            <div class="dots-controls">
+                <span class="dot-red" onclick="closeWin(this)"></span>
+                <span class="dot-yellow" onclick="minimizeWin(this)"></span>
                 <span class="dot-green" onclick="maxWin(this)"></span>
             </div>
             <span class="title">ranger: /home/zawrer/tech_stack</span>
@@ -85,45 +141,11 @@
         </div>
     </div>
 
-    <div class="floating-window system-info" style="left: 55%; top: 15%; width: 480px; z-index: 10;">
+    <div class="floating-window gotop" data-ws="3" style="left: 10%; top: 12%; width: 550px; z-index: 10;">
         <div class="window-header">
             <div class="dots-controls">
                 <span class="dot-red" onclick="closeWin(this)"></span>
-                <span class="dot-yellow"></span>
-                <span class="dot-green" onclick="maxWin(this)"></span>
-            </div>
-            <span class="title">fastfetch --user zawrer</span>
-        </div>
-        <div class="window-content fastfetch-body">
-            <div class="fastfetch-left">
-                <pre class="ascii-logo">
-      /\
-     /  \
-    /\   \
-   /  \   \
-  /    \   \
-/      \   \
-                </pre>
-            </div>
-            <div class="fastfetch-right">
-                <h1 class="user-host">zawrer@cachyos</h1>
-                <hr class="sep">
-                <div class="data-pair"><span class="key">OS</span>: Arch Linux x86_64</div>
-                <div class="data-pair"><span class="key">Shell</span>: zsh</div>
-                <div class="data-pair"><span class="key">WM</span>: Hyprland (Floating Rice)</div>
-                <hr class="sep">
-                <div class="fastfetch-gh">
-                    <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=cba6f7&text_color=a6adc8&icon_color=cba6f7" alt="GH Stats" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="floating-window gotop" style="left: 50%; top: 58%; width: 550px; z-index: 10;">
-        <div class="window-header">
-            <div class="dots-controls">
-                <span class="dot-red" onclick="closeWin(this)"></span>
-                <span class="dot-yellow"></span>
+                <span class="dot-yellow" onclick="minimizeWin(this)"></span>
                 <span class="dot-green" onclick="maxWin(this)"></span>
             </div>
             <span class="title">gotop - v4.1.2</span>
@@ -155,11 +177,11 @@
         </div>
     </div>
 
-    <div class="floating-window imv" style="left: 35%; top: 40%; width: 350px; z-index: 10;">
+    <div class="floating-window imv" data-ws="4" style="left: 15%; top: 15%; width: 400px; z-index: 10;">
         <div class="window-header">
             <div class="dots-controls">
                 <span class="dot-red" onclick="closeWin(this)"></span>
-                <span class="dot-yellow"></span>
+                <span class="dot-yellow" onclick="minimizeWin(this)"></span>
                 <span class="dot-green" onclick="maxWin(this)"></span>
             </div>
             <span class="title">imv -- view_splash.sh</span>
@@ -180,6 +202,5 @@
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
