@@ -30,10 +30,8 @@ body {
     height: 100vh;
     overflow: hidden;
     position: relative;
-    
-    /* Фон рабочего стола из скриншота */
     background-image: 
-        linear-gradient(to bottom, rgba(214, 100, 135, 0.9) 0%, rgba(111, 120, 188, 0.8) 50%, rgba(76, 86, 137, 0.9) 100%),
+        linear-gradient(to bottom, rgba(214, 100, 135, 0.5) 0%, rgba(111, 120, 188, 0.4) 50%, rgba(76, 86, 137, 0.6) 100%),
         url('https://c4.wallpaperflare.com/wallpaper/108/66/143/sunset-cityscape-city-buildings-wallpaper-preview.jpg');
     background-size: cover;
     background-attachment: fixed;
@@ -59,12 +57,10 @@ body {
 }
 
 .waybar-left, .waybar-right { display: flex; gap: 15px; align-items: center; }
-
 .workspaces { display: flex; gap: 2px; }
-.workspaces .ws { color: var(--text-muted); font-weight: bold; padding: 0 4px; cursor: pointer; transition: color 0.2s;}
+.workspaces .ws { color: var(--text-muted); font-weight: bold; padding: 0 8px; cursor: pointer; transition: color 0.2s;}
 .workspaces .ws:hover { color: var(--text-dim); }
 .workspaces .ws.active { color: var(--magenta); border-bottom: 2px solid var(--magenta); }
-
 .active-window-title { color: var(--text-muted); font-size: 0.8rem; }
 .module { padding: 2px 5px; color: var(--text-dim); }
 .module.power { color: var(--red); cursor: pointer; transition: transform 0.2s; }
@@ -76,45 +72,78 @@ body {
 /* ОБЩИЕ СТИЛИ ОКОН */
 .floating-window {
     position: absolute;
-    background-color: rgba(24, 24, 37, 0.85);
+    background-color: rgba(24, 24, 37, 0.92);
     border: 1px solid var(--window-border);
     border-radius: 6px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     overflow: hidden;
-    transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s; /* Для анимации максимизации */
+    transition: opacity 0.2s, transform 0.2s;
 }
 
-/* Header Окон (Draggable Area) */
 .window-header {
     background-color: var(--bar-bg);
-    padding: 4px 10px;
+    padding: 6px 12px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--window-border);
-    cursor: grab; /* Показываем, что можно тащить */
+    cursor: grab;
+    user-select: none;
 }
 .window-header:active { cursor: grabbing; }
-
-.dots-controls { display: flex; gap: 5px; margin-right: 15px; }
-.dots-controls span { width: 8px; height: 8px; border-radius: 50%; cursor: pointer; }
+.dots-controls { display: flex; gap: 6px; margin-right: 15px; }
+.dots-controls span { width: 10px; height: 10px; border-radius: 50%; cursor: pointer; }
 .dots-controls .dot-red { background-color: var(--red); }
 .dots-controls .dot-yellow { background-color: var(--yellow); }
 .dots-controls .dot-green { background-color: var(--green); }
-
 .title { font-size: 0.8rem; color: var(--text-dim); text-transform: lowercase; }
 .window-content { padding: 15px; }
 
-/* РАЗДЕЛИТЕЛИ */
-.term-sep, .sep { border: 0; height: 1px; background: var(--window-border); margin: 6px 0; }
+/* СТИЛИ КОМБИНИРОВАННОГО ОКНА (TERMINAL & FASTFETCH) */
+.terminal-window {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-height: 450px;
+}
+.terminal-body {
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    height: 180px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+.input-line { display: flex; align-items: center; margin-top: 5px; }
+.prompt { color: var(--green); margin-right: 5px; white-space: nowrap; }
+#terminal-input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    width: 100%;
+    outline: none;
+}
+.history-item { margin-top: 6px; color: var(--text-dim); }
+.response-item { margin-bottom: 6px; color: var(--blue); line-height: 1.3; }
 
-/* NCMPCPP STYLE */
-.ncmpcpp-body { padding: 10px; }
+/* NCMPCPP / МУЗЫКАЛЬНЫЙ ПЛЕЕР */
+.ncmpcpp-body { padding: 12px; }
 .metadata { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
 .track-info .icon { color: var(--magenta); margin-right: 5px; }
-.progress-bar-ascii { color: var(--magenta); letter-spacing: -2px; font-size: 0.9rem; margin-top: 5px;}
+.player-progress-container { display: flex; align-items: center; width: 100%; background: #252538; height: 6px; border-radius: 3px; margin: 10px 0; overflow: hidden; }
+.player-progress-bar { height: 100%; background: var(--magenta); width: 0%; transition: width 0.1s linear; }
+.player-controls { display: flex; justify-content: center; gap: 20px; margin: 12px 0; }
+.player-controls button { background: transparent; border: 1px solid var(--window-border); color: var(--text-main); border-radius: 4px; padding: 5px 15px; cursor: pointer; transition: 0.2s; }
+.player-controls button:hover { background: var(--window-border); color: var(--magenta); }
+.playlist { list-style: none; padding: 0; margin: 5px 0 0 0; font-size: 0.8rem; max-height: 80px; overflow-y: auto; }
+.playlist li { padding: 4px; color: var(--text-muted); cursor: pointer; border-radius: 3px; }
+.playlist li:hover { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+.playlist li.active-track { color: var(--cyan); font-weight: bold; background: rgba(137, 220, 235, 0.1); }
 
-/* RANGER STYLE */
+/* RANGER */
 .ranger-body { display: flex; padding: 10px; gap: 15px; font-size: 0.9rem; min-height: 200px; }
 .ranger-col { display: flex; flex-direction: column; }
 .ranger-left { flex: 1; border-right: 1px solid var(--window-border); }
@@ -125,42 +154,38 @@ body {
 .selected { color: var(--magenta); font-weight: bold;}
 .directory { color: var(--arch-blue); }
 
-/* FASTFETCH STYLE */
-.fastfetch-body { display: flex; padding: 10px; gap: 20px; align-items: center; }
+/* FASTFETCH */
+.fastfetch-body { display: flex; gap: 20px; align-items: center; }
 .ascii-logo { color: #1793D1; font-weight: bold; white-space: pre; line-height: 1.1; font-size: 0.8rem; margin: 0; }
 .fastfetch-right { font-size: 0.85rem; flex: 2; }
 .user-host { font-size: 1.1rem; font-weight: bold; margin: 0; color: var(--arch-blue); }
 .key { color: var(--magenta); font-weight: bold; }
-.fastfetch-gh img { width: 100%; height: auto; }
+.fastfetch-gh img { width: 100%; height: auto; border-radius: 4px; }
+.term-sep, .sep { border: 0; height: 1px; background: var(--window-border); margin: 6px 0; }
 
-/* gotop STYLE (ОКНО 4) */
+/* GOTOP */
 .gotop-body { padding: 10px; font-size: 0.85rem; }
 .gotop-row { display: flex; gap: 15px; }
 .gotop-graph { flex: 1; display: flex; flex-direction: column; }
-.gotop-graph .label { color: var(--fetch-key); margin-bottom: 5px; text-transform: uppercase;}
-
-/* Анимация графиков в gotop */
-.graph-bar-chart { display: flex; gap: 2px; align-items: flex-end; height: 60px; background-color: rgba(0,0,0,0.2); }
+.gotop-graph .label { color: var(--magenta); margin-bottom: 5px; text-transform: uppercase;}
+.graph-bar-chart { display: flex; gap: 2px; align-items: flex-end; height: 60px; background-color: rgba(0,0,0,0.2); padding: 0 4px; }
 .gotop-graph .bar { width: 18%; background-color: var(--magenta); border-radius: 2px; animation: gotopGraph 1.5s infinite; }
 .gotop-graph .bar-1 { height: 60%; animation-delay: 0s; }
 .gotop-graph .bar-2 { height: 85%; animation-delay: 0.2s; }
 .gotop-graph .bar-3 { height: 45%; animation-delay: 0.4s; }
 .gotop-graph .bar-4 { height: 75%; animation-delay: 0.6s; }
 .gotop-graph .bar-5 { height: 95%; animation-delay: 0.8s; }
-
 .gotop-processes .process-list { list-style: none; margin: 0; padding: 0; color: var(--text-muted);}
 .gotop-processes .pid { color: var(--cyan); }
 .gotop-processes .cmd { color: var(--arch-blue); }
 
-/* imv STYLE (ОКНО 5) */
+/* IMV */
 .imv-body { padding: 10px; display: flex; flex-direction: column; align-items: center;}
-.ascii-art { color: var(--fetch-key); font-size: 0.8rem; margin: 0; }
+.ascii-art { color: var(--cyan); font-size: 0.8rem; margin: 0; }
 .image-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; }
-
-/* Утилиты */
 .center-content { text-align: center; }
 
-/* Стили для максимизации окна */
+/* МАКСИМИЗАЦИЯ */
 .floating-window.maximized {
     top: 32px !important;
     left: 0 !important;
@@ -175,8 +200,11 @@ body {
     100% { transform: scaleY(1); }
 }
 
+.green { color: var(--green); }
+
+/* Адаптивность */
 @media (max-width: 900px) {
-    .floating-window { position: relative !important; left: 0 !important; top: 0 !important; width: 100% !important; margin-bottom: 20px; }
+    .floating-window { position: relative !important; left: 0 !important; top: 0 !important; width: 100% !important; margin-bottom: 20px; opacity: 1 !important; visibility: visible !important; }
     .hypr-desktop { height: auto; padding: 20px; overflow-y: auto; }
     .waybar { display: none; }
 }
