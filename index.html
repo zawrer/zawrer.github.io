@@ -9,124 +9,143 @@
 </head>
 <body>
 
-<!-- TOP WAYBAR -->
+<!-- WAYBAR -->
 <div class="waybar">
     <div class="waybar-left">
-        <span class="workspace">1</span>
-        <span class="workspace active">2</span>
-        <span class="workspace">3</span>
-        <span class="workspace">4</span>
+        <span class="ws">1</span>
+        <span class="ws active">2</span>
+        <span class="ws">3</span>
+        <span class="ws">4</span>
     </div>
     <div class="waybar-center">
-        <span class="window-title">zawrer@cachyos: ~ (hyprland-desktop)</span>
+        <span class="window-title">zawrer@cachyos: /home/zawrer</span>
     </div>
     <div class="waybar-right">
-        <span class="module cpu"> 24%</span>
-        <span class="module ram"> 4.2GB</span>
-        <span class="module lang">󰌌 RU</span>
-        <span class="module network">󰖩 ONLINE</span>
+        <span class="mod cpu">cpu: 18%</span>
+        <span class="mod mem">mem: 3.8 GiB</span>
+        <span class="mod lang">ru</span>
+        <span class="mod date">󰸗 cachyos-swm</span>
     </div>
 </div>
 
-<!-- MAIN HYPRLAND LAYOUT -->
-<div class="hypr-layout">
+<!-- HYPRLAND WORKSPACE CONTAINER -->
+<div class="hypr-container">
 
-    <!-- LEFT COLUMN: USER INFO -->
-    <div class="hypr-col flex-3">
+    <!-- LEFT COLUMN -->
+    <div class="hypr-column flex-3">
         
-        <!-- WINDOW 1: PROFILE HERO -->
-        <div class="hypr-window active-window">
-            <div class="window-header">
-                <span class="title">neofetch --user zawrer</span>
+        <!-- WINDOW 1: FASTFETCH / PROFILE -->
+        <div class="hypr-window focused">
+            <div class="window-bar">
+                <span class="dots"></span>
+                <span class="bar-title">fastfetch</span>
             </div>
-            <div class="window-content center-content">
-                <h1 class="nickname" onclick="playBeep()">zawrer</h1>
-                <div class="typing-header">
-                    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=00f0ff&center=true&vCenter=true&width=450&lines=SOFTWARE+DEVELOPER;CYBERSECURITY+%26+NETWORKS;LINUX+ENTHUSIAST" alt="Typing SVG" />
+            <div class="window-body profile-body">
+                <div class="ascii-logo">
+    /\
+   /  \
+  /\   \
+ /  \   \
+/    \   \
+/      \   \
+                </div>
+                <div class="fetch-info">
+                    <span class="fetch-user">zawrer</span>@<span class="fetch-host">cachyos</span>
+                    <hr class="fetch-sep">
+                    <div><span class="fetch-key">OS</span>: CachyOS / Arch Linux x86_64</div>
+                    <div><span class="fetch-key">WM</span>: Hyprland (Wayland)</div>
+                    <div><span class="fetch-key">Shell</span>: zsh</div>
+                    <div><span class="fetch-key">Editor</span>: Neovim / VS Code</div>
+                    <div><span class="fetch-key">Status</span>: Student Developer</div>
                 </div>
             </div>
         </div>
 
         <!-- WINDOW 2: ABOUT ME -->
         <div class="hypr-window">
-            <div class="window-header">
-                <span class="title">about_me.md</span>
+            <div class="window-bar">
+                <span class="dots"></span>
+                <span class="bar-title">cat about_me.md</span>
             </div>
-            <div class="window-content">
-                <ul class="terminal-list">
-                    <li><span class="arrow">-></span> <strong>Focus:</strong> Информационная безопасность, низкоуровневое программирование (C/C++) и сетевые технологии.</li>
-                    <li><span class="arrow">-></span> <strong>OS Stack:</strong> Основной рабочий инструмент — <strong class="highlight-cachy">CachyOS (Arch Linux)</strong> для разработки и хакинга, <strong>Windows 11</strong> для специфических задач.</li>
-                    <li><span class="arrow">-></span> <strong>Current Activity:</strong> Изучаю архитектуру сетей, пентест и основы реверс-инжиниринга.</li>
+            <div class="window-body">
+                <ul class="linux-list">
+                    <li><span class="list-bullet">~</span> <strong>Focus:</strong> Информационная безопасность, низкоуровневое программирование (C/C++) и сетевые технологии.</li>
+                    <li><span class="list-bullet">~</span> <strong>OS Stack:</strong> Основной рабочий инструмент — <span class="os-highlight">CachyOS (Arch Linux)</span> для разработки и хакинга, Windows 11 для специфических задач.</li>
+                    <li><span class="list-bullet">~</span> <strong>Current Activity:</strong> Изучаю архитектуру сетей, пентест и основы реверс-инжиниринга.</li>
                 </ul>
             </div>
         </div>
 
         <!-- WINDOW 3: TECH STACK -->
         <div class="hypr-window">
-            <div class="window-header">
-                <span class="title">view_stack.sh</span>
+            <div class="window-bar">
+                <span class="dots"></span>
+                <span class="bar-title">ls --tree /skills</span>
             </div>
-            <div class="window-content">
-                <div class="badge-group">
-                    <div class="stack-title">Languages</div>
-                    <div class="badges">
-                        <img src="https://img.shields.io/badge/C%2B%2B-1e1e2e?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++">
-                        <img src="https://img.shields.io/badge/C%23-1e1e2e?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#">
-                        <img src="https://img.shields.io/badge/Rust-1e1e2e?style=for-the-badge&logo=rust&logoColor=white" alt="Rust">
-                        <img src="https://img.shields.io/badge/Python-1e1e2e?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                        <img src="https://img.shields.io/badge/Bash-1e1e2e?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Bash">
+            <div class="window-body">
+                <div class="stack-section">
+                    <div class="section-tag">[ Languages ]</div>
+                    <div class="badges-container">
+                        <img src="https://img.shields.io/badge/C%2B%2B-1e1e2e?style=for-the-badge&logo=c%2B%2B&logoColor=cdd6f4" alt="C++">
+                        <img src="https://img.shields.io/badge/C%23-1e1e2e?style=for-the-badge&logo=c-sharp&logoColor=cdd6f4" alt="C#">
+                        <img src="https://img.shields.io/badge/Rust-1e1e2e?style=for-the-badge&logo=rust&logoColor=cdd6f4" alt="Rust">
+                        <img src="https://img.shields.io/badge/Python-1e1e2e?style=for-the-badge&logo=python&logoColor=cdd6f4" alt="Python">
+                        <img src="https://img.shields.io/badge/Bash-1e1e2e?style=for-the-badge&logo=gnu-bash&logoColor=cdd6f4" alt="Bash">
                     </div>
                 </div>
-                <div class="badge-group">
-                    <div class="stack-title">Tools & DB</div>
-                    <div class="badges">
-                        <img src="https://img.shields.io/badge/SQLite-1e1e2e?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-                        <img src="https://img.shields.io/badge/PostgreSQL-1e1e2e?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
-                        <img src="https://img.shields.io/badge/Git-1e1e2e?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+                <div class="stack-section">
+                    <div class="section-tag">[ Tools & Databases ]</div>
+                    <div class="badges-container">
+                        <img src="https://img.shields.io/badge/SQLite-1e1e2e?style=for-the-badge&logo=sqlite&logoColor=cdd6f4" alt="SQLite">
+                        <img src="https://img.shields.io/badge/PostgreSQL-1e1e2e?style=for-the-badge&logo=postgresql&logoColor=cdd6f4" alt="PostgreSQL">
+                        <img src="https://img.shields.io/badge/Git-1e1e2e?style=for-the-badge&logo=git&logoColor=cdd6f4" alt="Git">
                         <img src="https://img.shields.io/badge/Arch_Linux-1e1e2e?style=for-the-badge&logo=arch-linux&logoColor=1793D1" alt="Arch Linux">
-                        <img src="https://img.shields.io/badge/Docker-1e1e2e?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+                        <img src="https://img.shields.io/badge/Docker-1e1e2e?style=for-the-badge&logo=docker&logoColor=cdd6f4" alt="Docker">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- RIGHT COLUMN: METRICS & GRAPHS -->
-    <div class="hypr-col flex-2">
+    <!-- RIGHT COLUMN -->
+    <div class="hypr-column flex-2">
         
-        <!-- WINDOW 4: GITHUB STATS -->
+        <!-- WINDOW 4: GITHUB METRICS -->
         <div class="hypr-window">
-            <div class="window-header">
-                <span class="title">git_stats_monitor</span>
+            <div class="window-bar">
+                <span class="dots"></span>
+                <span class="bar-title">gh api /user/stats</span>
             </div>
-            <div class="window-content graph-content">
-                <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=111420&title_color=FFFFFF&text_color=8B949E&icon_color=ff007f" alt="Stats" />
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=zawrer&layout=compact&theme=dark&hide_border=true&bg_color=111420&title_color=FFFFFF&text_color=8B949E" alt="Top Langs" class="margin-top-gap" />
+            <div class="window-body media-body">
+                <img src="https://github-readme-stats.vercel.app/api?username=zawrer&show_icons=true&theme=dark&hide_border=true&bg_color=181825&title_color=b4befe&text_color=a6adc8&icon_color=b4befe" alt="GitHub Stats" />
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=zawrer&layout=compact&theme=dark&hide_border=true&bg_color=181825&title_color=b4befe&text_color=a6adc8" alt="Top Languages" class="split-gap" />
             </div>
         </div>
 
         <!-- WINDOW 5: STREAK & GRAPH -->
         <div class="hypr-window">
-            <div class="window-header">
-                <span class="title">activity_metrics.log</span>
+            <div class="window-bar">
+                <span class="dots"></span>
+                <span class="bar-title">contributions_graph.out</span>
             </div>
-            <div class="window-content graph-content">
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=zawrer&theme=dark&hide_border=true&background=111420&title=FFFFFF&text=8B949E&stroke=ff007f" alt="Streak" />
-                <img src="https://github-readme-activity-graph.vercel.app/graph?username=zawrer&theme=github-dark&bg_color=111420&hide_border=true&area=true&color=00f0ff" alt="Activity Graph" class="margin-top-gap" />
+            <div class="window-body media-body">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=zawrer&theme=dark&hide_border=true&background=181825&title=b4befe&text=a6adc8&stroke=b4befe" alt="Streak" />
+                <img src="https://github-readme-activity-graph.vercel.app/graph?username=zawrer&theme=github-dark&bg_color=181825&hide_border=true&area=true&color=b4befe" alt="Activity Graph" class="split-gap" />
             </div>
         </div>
 
         <!-- WINDOW 6: CONTACTS -->
         <div class="hypr-window">
-            <div class="window-header">
-                <span class="title">establish_connection.py</span>
+            <div class="window-bar">
+                <span class="dots"></span>
+                <span class="bar-title">ssh /links</span>
             </div>
-            <div class="window-content contacts-box">
+            <div class="window-body contacts-body">
                 <a href="https://t.me/@six6666seven7777" target="_blank">
-                    <img src="https://img.shields.io/badge/Telegram-1e1e2e?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram" />
+                    <img src="https://img.shields.io/badge/Telegram-1e1e2e?style=for-the-badge&logo=telegram&logoColor=cdd6f4" alt="Telegram" />
                 </a>
                 <a href="https://discord.com/users/@six6666seven7777" target="_blank">
-                    <img src="https://img.shields.io/badge/Discord-1e1e2e?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
+                    <img src="https://img.shields.io/badge/Discord-1e1e2e?style=for-the-badge&logo=discord&logoColor=cdd6f4" alt="Discord" />
                 </a>
             </div>
         </div>
@@ -134,20 +153,5 @@
 
 </div>
 
-<script>
-    function playBeep() {
-        const context = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = context.createOscillator();
-        const gain = context.createGain();
-        osc.type = 'sine';
-        osc.frequency.value = 520; 
-        gain.gain.setValueAtTime(0.08, context.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.12);
-        osc.connect(gain);
-        gain.connect(context.destination);
-        osc.start();
-        osc.stop(context.currentTime + 0.12);
-    }
-</script>
 </body>
 </html>
