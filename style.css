@@ -1,0 +1,253 @@
+:root {
+    --bg-color: #090b10;
+    --panel-bg: #111420;
+    --accent-neon: #ff007f;
+    --accent-blue: #00f0ff;
+    --text-main: #cdd6f4;
+    --text-muted: #626880;
+    --border-color: #2a2f45;
+}
+
+body {
+    font-family: 'Fira Code', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+    padding: 40px 20px;
+    background-image: 
+        linear-gradient(rgba(16, 20, 32, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 20, 32, 0.4) 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow-x: hidden;
+}
+
+/* CRT/Сканирующая полоса */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 99999;
+    opacity: 0.4;
+    pointer-events: none;
+    background-size: 100% 4px, 6px 100%;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--panel-bg);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+    position: relative;
+}
+
+/* Эмуляция псевдо-терминала */
+.container::before {
+    content: "ROOT@ZAWRER:~";
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--bg-color);
+    padding: 0 10px;
+    color: var(--accent-blue);
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+}
+
+.nickname-container {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.nickname {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin: 0;
+    text-shadow: 0 0 10px var(--accent-neon), 0 0 20px var(--accent-neon);
+    animation: pulseGlow 3s infinite alternate;
+    cursor: pointer;
+}
+
+.nickname:hover {
+    animation: glitch 0.3s linear infinite;
+    color: var(--accent-blue);
+    text-shadow: 0 0 10px var(--accent-blue), 0 0 20px var(--accent-blue);
+}
+
+.system-status {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+.typing-header {
+    text-align: center; 
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    border-bottom: 2px dashed var(--border-color);
+    padding-bottom: 8px;
+    margin-top: 45px;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+
+h2::before {
+    content: "■ ";
+    color: var(--accent-neon);
+    margin-right: 8px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px;
+    border-left: 3px solid var(--accent-blue);
+    border-radius: 0 6px 6px 0;
+}
+
+.prefix {
+    color: var(--accent-neon);
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.content-text {
+    color: var(--text-main);
+}
+
+.content-text strong {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.badge-group h3 {
+    font-size: 0.9rem;
+    color: var(--accent-blue);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.badges img {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
+
+.badges img:hover {
+    transform: translateY(-5px) scale(1.05);
+    filter: drop-shadow(0 0 8px var(--accent-blue));
+}
+
+.metrics-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.metrics-grid img, 
+.full-width-graph img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: #0d1117;
+}
+
+.half-width {
+    width: 48%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.contacts {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.contacts a {
+    transition: transform 0.2s;
+}
+
+.contacts a:hover {
+    transform: scale(1.05);
+}
+
+#custom-menu {
+    display: none;
+    position: absolute;
+    background: var(--panel-bg);
+    border: 1px solid var(--accent-blue);
+    padding: 8px 0;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+}
+
+#custom-menu div {
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+#custom-menu div:hover {
+    background: var(--accent-neon);
+    color: white;
+}
+
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 8px var(--accent-neon), 0 0 12px var(--accent-neon); }
+    100% { text-shadow: 0 0 18px var(--accent-neon), 0 0 28px var(--accent-neon); }
+}
+
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
+@media (max-width: 768px) {
+    body { padding: 15px 10px; }
+    .container { padding: 20px; }
+    .half-width { width: 100%; }
+    .nickname { font-size: 2.3rem; }
+}
