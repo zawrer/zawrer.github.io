@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zawrer@arch-hyprland</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+
     <div id="boot-screen">
         <div id="boot-log"></div>
     </div>
@@ -15,10 +16,15 @@
     <div id="desktop" class="hidden">
         <div id="waybar">
             <div class="bar-left">
-                <i class="fab fa-linux" style="color: #7f7f7f;"></i>
+                <i class="fab fa-linux linux-icon"></i>
                 <span class="workspace active">1</span>
                 <span class="workspace">2</span>
                 <span class="workspace">3</span>
+                <span class="separator">|</span>
+                <span class="bar-app-btn" data-target="win-terminal" title="Открыть Терминал"><i class="fas fa-terminal"></i></span>
+                <span class="bar-app-btn" data-target="win-info" title="Открыть Монитор"><i class="fas fa-shield-alt"></i></span>
+                <span class="bar-app-btn" data-target="win-player" title="Открыть Плеер"><i class="fas fa-music"></i></span>
+                <span class="bar-app-btn" data-target="win-cat" title="Открыть Камеру кота"><i class="fas fa-cat"></i></span>
             </div>
             <div class="bar-center">
                 <span id="current-window">terminal — zawrer@arch</span>
@@ -30,17 +36,20 @@
             </div>
         </div>
 
-        <div class="tiles-container">
-            <div class="window" id="win-terminal">
+        <div class="tiles-container" id="tiles-grid">
+            <div class="window focused" id="win-terminal">
                 <div class="window-header">
                     <span class="window-title"><i class="fas fa-terminal"></i> bsh — zawrer@arch</span>
-                    <span class="window-status">active</span>
+                    <div class="window-controls">
+                        <span class="window-status">active</span>
+                        <button type="button" class="close-btn" aria-label="Close window">&times;</button>
+                    </div>
                 </div>
                 <div class="window-content terminal-body" id="term-body">
                     <div id="terminal-output"></div>
                     <div class="input-line">
                         <span class="prompt">zawrer@arch ~ $</span>
-                        <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+                        <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
                     </div>
                 </div>
             </div>
@@ -48,12 +57,15 @@
             <div class="window" id="win-info">
                 <div class="window-header">
                     <span class="window-title"><i class="fas fa-shield-alt"></i> security-monitor.sh</span>
-                    <span class="window-status">idle</span>
+                    <div class="window-controls">
+                        <span class="window-status">idle</span>
+                        <button type="button" class="close-btn" aria-label="Close window">&times;</button>
+                    </div>
                 </div>
                 <div class="window-content info-body">
                     <h3>[ SECURITY STATUS: SECURE ]</h3>
-                    <hr>
-                    <p>> Target: Learning Cyber Security & Pentesting</p>
+                    <hr class="info-divider">
+                    <p>> Target: Learning Cyber Security &amp; Pentesting</p>
                     <p>> Network Traffic: <span class="green-text">ANALYZING...</span></p>
                     <p>> Firewall: <span class="green-text">ACTIVE</span></p>
                     <div class="radar-line"></div>
@@ -64,32 +76,44 @@
             <div class="window" id="win-player">
                 <div class="window-header">
                     <span class="window-title"><i class="fas fa-music"></i> ncmpcpp (Music Player)</span>
-                    <span class="window-status">idle</span>
+                    <div class="window-controls">
+                        <span class="window-status">idle</span>
+                        <button type="button" class="close-btn" aria-label="Close window">&times;</button>
+                    </div>
                 </div>
                 <div class="window-content player-body">
-                    <div class="player-art">
+                    <div class="player-art" id="player-icon-container">
                         <i class="fas fa-compact-disc fa-spin-slow"></i>
                     </div>
                     <div class="player-info">
                         <div id="track-title">Cyberpunk Ambient Track</div>
                         <div id="track-author">zawrer Lofi Beats</div>
                     </div>
-                    <div class="progress-container">
+                    <div class="progress-container" id="progress-container">
                         <div class="progress-bar" id="progress"></div>
                     </div>
                     <div class="player-controls">
-                        <button id="prev-btn"><i class="fas fa-backward"></i></button>
-                        <button id="play-btn"><i class="fas fa-play"></i></button>
-                        <button id="next-btn"><i class="fas fa-forward"></i></button>
+                        <button type="button" id="prev-btn" aria-label="Previous track">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button type="button" id="play-btn" aria-label="Play or Pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button type="button" id="next-btn" aria-label="Next track">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
                     </div>
-                    <audio id="audio-player" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+                    <audio id="audio-player" src="" preload="auto"></audio>
                 </div>
             </div>
 
             <div class="window" id="win-cat">
                 <div class="window-header">
                     <span class="window-title"><i class="fas fa-cat"></i> /dev/video0 (Cat Status)</span>
-                    <span class="window-status">idle</span>
+                    <div class="window-controls">
+                        <span class="window-status">idle</span>
+                        <button type="button" class="close-btn" aria-label="Close window">&times;</button>
+                    </div>
                 </div>
                 <div class="window-content cat-body">
                     <img id="cat-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9pY3g1am95bXN5Y3I0ZndpM2N6Znd4NndyM3E0bndpYm85am9pbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" alt="Coding Cat">
