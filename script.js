@@ -14,22 +14,20 @@ const bootLogs = [
     "Boot finished. Launching environment..."
 ];
 
-// Локальные обои из папки проекта image/
-// Динамическая генерация случайных обоев из интернета (Unsplash API)
 function getRandomWallpaperUrl() {
-    // Ключевые слова для поиска подходящего бэкграунда
+
     const keywords = "cyberpunk,dark,abstract,minimalism";
-    // Уникальная сигнатура (timestamp) заставляет браузер загружать каждый раз новую картинку
+
     const uniqueSignature = Date.now(); 
     
     return `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://source.unsplash.com/featured/1920x1080/?${keywords}&sig=${uniqueSignature}')`;
 }
 
-// Начальные обои при загрузке страницы
+
 let currentWallpaper = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920')";
 let currentWallpaperIdx = 0;
 
-// Плейлист музыкального плеера
+
 const playlist = [
     {
         title: "Cyberpunk Ambient Track",
@@ -197,14 +195,14 @@ function triggerSystemCrash() {
     setTimeout(() => { location.reload(); }, 3000);
 }
 
-// Модуль управления окнами (Фокус, Закрытие, Открытие через Waybar)
+
 function initWindowManager() {
     const windows = document.querySelectorAll(".window");
     const currentWinBar = document.getElementById("current-window");
     const wallBtn = document.getElementById("wallpaper-btn");
     const barAppButtons = document.querySelectorAll(".bar-app-btn");
 
-    // Обработка клика по окну для смены фокуса
+
     windows.forEach(win => {
         win.addEventListener("click", () => {
             if (win.classList.contains("hidden")) return;
@@ -217,15 +215,15 @@ function initWindowManager() {
             }
         });
 
-        // Функция закрытия окна при нажатии на крестик
+
         const closeBtn = win.querySelector(".close-btn");
         if (closeBtn) {
             closeBtn.addEventListener("click", (e) => {
-                e.stopPropagation(); // Исключаем фокус перед закрытием
+                e.stopPropagation(); 
                 win.classList.add("hidden");
                 win.classList.remove("focused");
                 
-                // Перенаправляем фокус на любое оставшееся открытое окно
+
                 const remainingVisible = Array.from(windows).find(w => !w.classList.contains("hidden"));
                 if (remainingVisible) {
                     remainingVisible.click();
@@ -236,42 +234,42 @@ function initWindowManager() {
         }
     });
 
-    // Открытие окон заново через кнопки в Waybar
+
     barAppButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const targetId = btn.getAttribute("data-target");
             const win = document.getElementById(targetId);
             if (win) {
                 win.classList.remove("hidden");
-                win.click(); // Даем фокус
+                win.click();
             }
         });
     });
 
 if (wallBtn) {
-        // Устанавливаем стартовые обои при инициализации
+
         document.body.style.backgroundImage = currentWallpaper;
 
         wallBtn.addEventListener("click", () => {
-            // Меняем статус во Waybar на время загрузки
+
             const originalText = wallBtn.innerHTML;
             wallBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading...`;
 
-            // Создаем временный объект изображения для предзагрузки в кэш
+
             const img = new Image();
             const newWallpaperUrl = getRandomWallpaperUrl();
             
-            // Вытягиваем чистый URL из нашей строки с градиентом
+
             const cleanUrl = newWallpaperUrl.match(/url\('(.*)'\)/)[1];
 
             img.onload = () => {
-                // Как только картинка скачалась, плавно меняем фон
+   
                 document.body.style.backgroundImage = newWallpaperUrl;
                 wallBtn.innerHTML = originalText;
             };
 
             img.onerror = () => {
-                // Если интернета нет или API лег, сбрасываем на дефолтный темный цвет
+
                 document.body.style.backgroundImage = "none";
                 document.body.style.backgroundColor = "#0b0b0b";
                 wallBtn.innerHTML = originalText;
@@ -302,7 +300,7 @@ if (wallBtn) {
     });
 }
 
-// Модуль расширенного плеера (Play, Pause, Next, Prev, Playlist)
+
 function initAudioPlayerSystem() {
     const audio = document.getElementById("audio-player");
     const playBtn = document.getElementById("play-btn");
@@ -317,7 +315,7 @@ function initAudioPlayerSystem() {
 
     if (!audio || !playBtn || !progressBar || !prevBtn || !nextBtn) return;
 
-    // Загрузка метаданных текущего трека
+
     function loadTrack(idx) {
         const track = playlist[idx];
         audio.src = track.url;
@@ -345,7 +343,7 @@ function initAudioPlayerSystem() {
         if (playerWin) playerWin.querySelector(".window-status").textContent = "paused";
     }
 
-    // Инициализация первого трека при загрузке системы
+
     loadTrack(currentTrackIdx);
 
     playBtn.addEventListener("click", (e) => {
@@ -373,7 +371,7 @@ function initAudioPlayerSystem() {
         if (wasPlaying) playTrack();
     });
 
-    // Автоматический переход на следующий трек по окончании текущего
+
     audio.addEventListener("ended", () => {
         currentTrackIdx = (currentTrackIdx + 1) % playlist.length;
         loadTrack(currentTrackIdx);
